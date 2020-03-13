@@ -2,76 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".LoginActivity"
+    android:layout_margin="20dp">
 
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Login"
+        android:textSize="50dp"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/colorPrimary"/>
 
-        <ImageView
-            android:scaleType="fitXY"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/splash_bg" />
+    <EditText
+        android:hint="Username"
+        android:id="@+id/edt_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0.7"
-            android:src="@drawable/splash_bglayer" />
+    <EditText
+        android:hint="Password"
+        android:id="@+id/edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword"/>
 
+    <Button
+        android:text="Login"
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"/>
 
-        <LinearLayout
-            android:weightSum="12"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_marginBottom="230dp"
-                android:layout_weight="1.4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="30dp"
-                android:src="@drawable/logo" />
-
-            <TextView
-                android:layout_marginTop="18dp"
-                android:textAlignment="center"
-                android:textSize="22dp"
-                android:layout_weight="3.7"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="A click away from your pick" />
-
-            <Button
-                android:layout_marginVertical="7dp"
-                android:layout_weight="3.65"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="45dp"
-                android:alpha="0.7"
-                android:background="@drawable/btn_design_signin"
-                android:text="Sign In"
-                android:textColor="#FFFFFF"
-                android:textSize="22dp" />
-
-            <Button
-                android:layout_marginVertical="7dp"
-                android:layout_weight="3.65"
-                android:alpha="0.8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="45dp"
-                android:background="@drawable/btn_design_signup"
-                android:text="Sign Up"
-                android:textColor="@color/mainColor"
-                android:textSize="22dp" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
 </LinearLayout>

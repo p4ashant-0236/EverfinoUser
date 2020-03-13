@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         map=appSharedPreferences.getPref();
 
-        if(Integer.parseInt(map.get("adminid"))==0 && map.get("username")=="")
+        if(Integer.parseInt(map.get("userid"))==0 && map.get("email")=="")
         {
             Intent i=new Intent(MainActivity.this,LoginActivity.class);
             startActivity(i);

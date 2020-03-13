@@ -9,8 +9,8 @@ public class AppSharedPreferences {
      SharedPreferences sharedPreferences;
      Context context;
 
-     int adminid;
-     String username;
+     int userid;
+     String email;
 
      final String prefname="EVERFINO_PREF";
      public AppSharedPreferences(Context context)
@@ -18,18 +18,18 @@ public class AppSharedPreferences {
          sharedPreferences=context.getSharedPreferences(prefname,Context.MODE_PRIVATE);
      }
 
-     public void setPref(int adminid,String username)
+     public void setPref(int userid,String email)
      {
-         this.adminid=adminid;
-         this.username=username;
+         this.userid=userid;
+         this.email=email;
 
-         sharedPreferences.edit().putInt("adminid",this.adminid).putString("username",this.username).commit();
+         sharedPreferences.edit().putInt("userid",this.userid).putString("email",this.email).commit();
      }
 
      public HashMap<String,String> getPref()
      {  HashMap<String,String> map=new HashMap<>();
-         map.put("adminid",sharedPreferences.getInt("adminid",0)+"");
-         map.put("username",sharedPreferences.getString("username",""));
+         map.put("userid",sharedPreferences.getInt("userid",0)+"");
+         map.put("email",sharedPreferences.getString("email",""));
 
          return map;
      }
