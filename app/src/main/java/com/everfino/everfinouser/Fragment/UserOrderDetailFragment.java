@@ -15,12 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.everfino.everfinouser.Adapter.OrderAdapter;
+import com.everfino.everfinouser.Adapter.OrderItemAdapter;
 import com.everfino.everfinouser.ApiConnection.Api;
 import com.everfino.everfinouser.ApiConnection.ApiClient;
 import com.everfino.everfinouser.AppSharedPreferences;
-import com.everfino.everfinouser.LoginActivity;
-import com.everfino.everfinouser.Models.Order;
+import com.everfino.everfinouser.Models.Menu;
+import com.everfino.everfinouser.Models.OrderItem;
+import com.everfino.everfinouser.Models.Restaurant;
 import com.everfino.everfinouser.R;
 
 import java.util.ArrayList;
@@ -34,9 +35,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HistoryFragment extends Fragment {
-
-
+public class UserOrderDetailFragment extends Fragment {
     AppSharedPreferences appSharedPreferences;
     HashMap<String,String> map;
     RecyclerView rcv_order;
@@ -44,7 +43,7 @@ public class HistoryFragment extends Fragment {
     List<HashMap<String, String>> ls_order = new ArrayList<>();
     private static Api apiService;
 
-    public HistoryFragment() {
+    public UserOrderDetailFragment() {
         // Required empty public constructor
     }
 
@@ -79,29 +78,32 @@ public class HistoryFragment extends Fragment {
         ls_order.clear();
         rcv_order.setLayoutManager(new GridLayoutManager(getContext(), 1));
         map=appSharedPreferences.getPref();
-        Call<List<Order>> call = apiService.get_user_order(Integer.parseInt(map.get("userid")));
-        call.enqueue(new Callback<List<Order>>() {
+        Call<List<OrderItem>> call = apiService.get_order_detail(Integer.parseInt(map.get("userid")),getArguments().getInt("orderid"));
+        call.enqueue(new Callback<List<OrderItem>>() {
             @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                for (Order item : response.body()) {
+            public void onResponse(Call<List<OrderItem>> call, Response<List<OrderItem>> response) {
+                for (OrderItem item : response.body()) {
 
+                    Menu m=item.getItem();
+
+                    Restaurant r=item.getRest();
                     HashMap<String, String> map = new HashMap<>();
-                    map.put("orderid", item.getOrderid() + "");
-                    map.put("userid",item.getUserid()+"");
-                    map.put("amount",item.getAmount()+"");
-                    map.put("paymentstatus",item.getPaymentstatus());
-                    map.put("order_date",item.getOrder_date()+"");
-
+                    map.put("itemid",m.getItemid()+"");
+                    map.put("itemname",m.getItemname());
+                    map.put("itemprice",m.getItemprice()+"");
+                    map.put("itemdesc",m.getItemdesc());
+                    map.put("itemtype",m.getItemtype());
+                    map.put("restname",r.getRestname());
                     ls_order.add(map);
                 }
 
-                OrderAdapter adapter = new OrderAdapter(getContext(), ls_order);
+                OrderItemAdapter adapter = new OrderItemAdapter(getContext(), ls_order);
                 rcv_order.setAdapter(adapter);
                 progressDialog.dismiss();
             }
 
             @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
+            public void onFailure(Call<List<OrderItem>> call, Throwable t) {
                 Toast.makeText(getContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
