@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.everfino.everfinouser.ApiConnection.Api;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText edt_usernme, edt_password;
     Button btn_login;
+    TextView signup;
     ProgressDialog progressDialog;
     private static Api apiService;
     AppSharedPreferences appSharedPreferences;
@@ -35,11 +37,18 @@ public class LoginActivity extends AppCompatActivity {
 
         edt_usernme = findViewById(R.id.edt_username);
         edt_password = findViewById(R.id.edt_password);
-
+        signup=findViewById(R.id.signup);
         btn_login = findViewById(R.id.btn_login);
 
         apiService= ApiClient.getClient().create(Api.class);
         appSharedPreferences=new AppSharedPreferences(this);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(LoginActivity.this,RegisterUserActivity.class);
+                startActivity(i);
+            }
+        });
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -53,7 +53,7 @@ public class ScanFragment extends Fragment {
             @Override
             public void handleResult(Result result) {
 
-                Toast.makeText(getActivity(), "" + result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "" +result.toString().substring(0,1), Toast.LENGTH_SHORT).show();
                 Fragment fragment=new HomeFragment();
                 loadFragment(fragment);
             }

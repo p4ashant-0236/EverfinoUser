@@ -40,4 +40,12 @@
         android:textColor="@color/white"
         android:layout_marginTop="20dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Sign Up"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/signup"/>
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.everfino.everfinouser.ApiConnection;
 
 import com.everfino.everfinouser.Models.Order;
 import com.everfino.everfinouser.Models.OrderItem;
+import com.everfino.everfinouser.Models.User;
 import com.everfino.everfinouser.Models.UserLoginResponse;
 import com.google.gson.JsonObject;
 
@@ -31,4 +32,6 @@ public interface Api {
     @GET("rest_enduserorder/moreuserorder/{userid}")
     Call<List<OrderItem>> get_order_detail(@Path("userid") int userid, @Query("orderid") int orderid);
 
+    @POST("enduser/add")
+    Call<User> register_User(@Body JsonObject object);
 }

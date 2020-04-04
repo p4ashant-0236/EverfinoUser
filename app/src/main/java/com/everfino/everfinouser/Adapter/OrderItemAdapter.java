@@ -78,7 +78,11 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         }
 
     }
-
+    public void filterList(List<HashMap<String,String>> ls)
+    {
+        this.ls=ls;
+        notifyDataSetChanged();
+    }
 
 }
 
