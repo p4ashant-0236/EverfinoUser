@@ -52,9 +52,36 @@ public class ScanFragment extends Fragment {
         qrCodeScanner.setResultHandler(new ZXingScannerView.ResultHandler() {
             @Override
             public void handleResult(Result result) {
-
-                Toast.makeText(getActivity(), "" +result.toString().substring(0,1), Toast.LENGTH_SHORT).show();
-                Fragment fragment=new HomeFragment();
+                String restid="",tableid="";
+                int flag=0;
+                for (char i:result.toString().toCharArray()) {
+                        if(flag==0)
+                        {
+                            if(i!='_')
+                            {
+                                restid=restid+i;
+                            }
+                            else {
+                                flag=1;
+                            }
+                        }
+                        else
+                        {
+                            if(flag==1)
+                            {   if(i!='_') {
+                                tableid = tableid + i;
+                            }else
+                            {
+                                break;
+                            }
+                            }
+                        }
+                }
+                 Fragment fragment=new RestMenuFragment();
+                Bundle b=new Bundle();
+                b.putInt("restid",Integer.parseInt(restid));
+                b.putInt("tableid",Integer.parseInt(tableid));
+                fragment.setArguments(b);
                 loadFragment(fragment);
             }
         });

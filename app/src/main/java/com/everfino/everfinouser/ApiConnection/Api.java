@@ -1,6 +1,7 @@
 package com.everfino.everfinouser.ApiConnection;
 
 
+import com.everfino.everfinouser.Models.MenuList;
 import com.everfino.everfinouser.Models.Order;
 import com.everfino.everfinouser.Models.OrderItem;
 import com.everfino.everfinouser.Models.User;
@@ -34,4 +35,9 @@ public interface Api {
 
     @POST("enduser/add")
     Call<User> register_User(@Body JsonObject object);
+
+
+    @GET("rest_Menu/{restid}")
+
+    Call<List<MenuList>> get_Rest_Menu(@Path("restid") int restid);
 }

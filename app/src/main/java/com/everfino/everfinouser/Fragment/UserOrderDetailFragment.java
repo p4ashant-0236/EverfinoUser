@@ -59,8 +59,8 @@ public class UserOrderDetailFragment extends Fragment {
 
 
 
-        final View view = inflater.inflate(R.layout.fragment_history, container, false);
-        rcv_order = view.findViewById(R.id.rcv_order);
+        final View view = inflater.inflate(R.layout.fragment_user_order_detail, container, false);
+        rcv_order = view.findViewById(R.id.rcv_orderdetails);
 
         apiService = ApiClient.getClient().create(Api.class);
         appSharedPreferences=new AppSharedPreferences(getContext());

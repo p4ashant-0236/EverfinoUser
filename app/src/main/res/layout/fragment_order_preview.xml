@@ -4,19 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-   >
+    tools:context=".Fragment.OrderPreviewFragment">
+
+
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Search"
 
-        android:id="@+id/searchuserorder"/>
+        android:id="@+id/searchorder"/>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_order"
+        android:id="@+id/rcv_menu_order"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        />
 
 
 </LinearLayout>
