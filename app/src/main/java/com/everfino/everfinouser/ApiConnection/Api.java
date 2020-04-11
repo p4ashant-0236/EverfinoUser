@@ -49,9 +49,13 @@ public interface Api {
     @POST("rest_liveorder/add/{restid}")
     Call<Liveorder> add_Live_Order(@Path("restid") int restid,@Body JsonObject obj);
 
+    @GET("rest_liveorder/liveorder_order/perUserOrder/{restid}")
+    Call<List<Liveorder>> get_Live_order_peruser(@Path("restid") int restid,@Query("userid") int userid);
+
 
     @GET("rest/")
     Call<List<RestList>> get_Rest();
+
 
 
 }
