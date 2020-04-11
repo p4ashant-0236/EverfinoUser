@@ -4,25 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragment.OrderPreviewFragment">
+    tools:context=".Fragment.DisplayRestMenuFragment">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Search"
 
-        android:id="@+id/searchorder"/>
+        android:id="@+id/searchmenu"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_menu_order"
+        android:id="@+id/rcv_menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="vertical"
         />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Place order"
-        android:id="@+id/placebtn"/>
 </LinearLayout>

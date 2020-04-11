@@ -1,9 +1,11 @@
 package com.everfino.everfinouser.ApiConnection;
 
 
+import com.everfino.everfinouser.Models.Liveorder;
 import com.everfino.everfinouser.Models.MenuList;
 import com.everfino.everfinouser.Models.Order;
 import com.everfino.everfinouser.Models.OrderItem;
+import com.everfino.everfinouser.Models.RestList;
 import com.everfino.everfinouser.Models.User;
 import com.everfino.everfinouser.Models.UserLoginResponse;
 import com.google.gson.JsonObject;
@@ -27,6 +29,7 @@ public interface Api {
             @Body JsonObject object);
 
 
+
     @GET("rest_enduserorder/{userid}")
     Call <List<Order>> get_user_order(@Path("userid") int userid);
 
@@ -38,6 +41,17 @@ public interface Api {
 
 
     @GET("rest_Menu/{restid}")
-
     Call<List<MenuList>> get_Rest_Menu(@Path("restid") int restid);
+
+    @POST("rest_Order/add/{restid}")
+    Call<Order> place_Order(@Path("restid") int restid,@Body JsonObject obj);
+
+    @POST("rest_liveorder/add/{restid}")
+    Call<Liveorder> add_Live_Order(@Path("restid") int restid,@Body JsonObject obj);
+
+
+    @GET("rest/")
+    Call<List<RestList>> get_Rest();
+
+
 }

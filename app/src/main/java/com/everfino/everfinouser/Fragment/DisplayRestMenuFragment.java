@@ -14,17 +14,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.everfino.everfinouser.Adapter.MenuAdapter;
+import com.everfino.everfinouser.Adapter.RestMenuAdapter;
 import com.everfino.everfinouser.ApiConnection.Api;
 import com.everfino.everfinouser.ApiConnection.ApiClient;
 import com.everfino.everfinouser.AppSharedPreferences;
 import com.everfino.everfinouser.Models.MenuList;
 import com.everfino.everfinouser.R;
-import com.google.gson.Gson;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,19 +36,19 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RestMenuFragment extends Fragment {
+public class DisplayRestMenuFragment extends Fragment {
 
     AppSharedPreferences appSharedPreferences;
     HashMap<String,String> map;
     RecyclerView rcv_menu;
-    MenuAdapter adapter;
-    EditText searchmenu;
-    Button placeorder;
-    List<HashMap<String,String>> ordereditem=new ArrayList<>();
 
+
+    RestMenuAdapter adapter;
+    EditText searchmenu;
     List<HashMap<String, String>> ls_menu = new ArrayList<>();
     private static Api apiService;
-    public RestMenuFragment() {
+
+    public DisplayRestMenuFragment() {
         // Required empty public constructor
     }
 
@@ -57,44 +56,14 @@ public class RestMenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_rest_menu, container, false);
+
+
+        final View view = inflater.inflate(R.layout.fragment_display_rest_menu, container, false);
         rcv_menu = view.findViewById(R.id.rcv_menu);
+
         apiService = ApiClient.getClient().create(Api.class);
         appSharedPreferences=new AppSharedPreferences(getContext());
-        placeorder=view.findViewById(R.id.placeorder);
-        placeorder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                ordereditem=adapter.getSelected();
-
-
-                ArrayList<String> itemname=new ArrayList<>();
-                ArrayList<String> itemprice=new ArrayList<>();
-                ArrayList<String> orderquntity=new ArrayList<>();
-                ArrayList<String> itemid=new ArrayList<>();
-                for (HashMap<String,String> item : ordereditem)
-                {
-                        itemid.add(item.get("itemid"));
-                        itemname.add(item.get("itemname"));
-                        itemprice.add(item.get("itemprice"));
-                        orderquntity.add(item.get("orderquntity"));
-                }
-                Bundle b=new Bundle();
-                b.putInt("tableid",getArguments().getInt("tableid"));
-                b.putInt("restid",getArguments().getInt("restid"));
-
-                b.putStringArrayList("itemid",itemid);
-                b.putStringArrayList("itemname",itemname);
-                b.putStringArrayList("itemprice",itemprice);
-                b.putStringArrayList("orderquntity",orderquntity);
-
-                Fragment fragment=new OrderPreviewFragment();
-                fragment.setArguments(b);
-                Log.e("###","abc");
-                loadFragment(fragment);
-            }
-        });
         searchmenu=view.findViewById(R.id.searchmenu);
         searchmenu.addTextChangedListener(new TextWatcher() {
             @Override
@@ -135,7 +104,7 @@ public class RestMenuFragment extends Fragment {
         ls_menu.clear();
         rcv_menu.setLayoutManager(new GridLayoutManager(getContext(), 1));
         map=appSharedPreferences.getPref();
-        Call<List<MenuList>> call = apiService.get_Rest_Menu(getArguments().getInt("restid"));
+        Call<List<MenuList>> call = apiService.get_Rest_Menu(Integer.parseInt(getArguments().getString("restid")));
         call.enqueue(new Callback<List<MenuList>>() {
             @Override
             public void onResponse(Call<List<MenuList>> call, Response<List<MenuList>> response) {
@@ -147,12 +116,11 @@ public class RestMenuFragment extends Fragment {
                     map.put("itemprice", item.getItemprice() + "");
                     map.put("itemtype", item.getItemtype());
                     map.put("itemdesc", item.getItemdesc());
-                    map.put("orderquntity","0");
                     Log.e("####", item.getItemname());
                     ls_menu.add(map);
                 }
 
-                adapter = new MenuAdapter(getContext(), ls_menu);
+                adapter = new RestMenuAdapter(getContext(), ls_menu);
                 rcv_menu.setAdapter(adapter);
             }
 
@@ -171,6 +139,5 @@ public class RestMenuFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 
 }
