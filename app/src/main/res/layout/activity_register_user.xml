@@ -55,11 +55,6 @@
                 android:layout_marginTop="20dp"
                 android:inputType="textPassword"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DOB"
-                android:textColor="@color/colorPrimary"/>
             <EditText
                 android:hint="dd-mm-yyyy"
                 android:id="@+id/dob"

@@ -2,12 +2,14 @@ package com.everfino.everfinouser;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import com.everfino.everfinouser.ApiConnection.ApiClient;
 import com.everfino.everfinouser.Models.User;
 import com.google.gson.JsonObject;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -29,6 +32,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     Button signup;
     private static Api apiService;
     String g[] = {"Male", "Female"};
+    int mYear, mMonth, mDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,23 @@ public class RegisterUserActivity extends AppCompatActivity {
         ArrayAdapter<String> data = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, g);
         data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(data);
+
+        mDay= Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        mMonth=Calendar.getInstance().get(Calendar.MONTH);
+        mYear=Calendar.getInstance().get(Calendar.YEAR);
+
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dataDialog=new DatePickerDialog(getApplicationContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        dob.setText(date+"-"+month+"-"+year);
+                    }
+                },mYear,mMonth,mDay);
+                dataDialog.show();
+            }
+        });
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
