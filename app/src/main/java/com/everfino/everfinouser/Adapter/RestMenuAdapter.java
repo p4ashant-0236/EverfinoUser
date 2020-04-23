@@ -2,10 +2,12 @@ package com.everfino.everfinouser.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.everfino.everfinouser.R;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +38,7 @@ public class RestMenuAdapter extends RecyclerView.Adapter<RestMenuAdapter.Viewho
     HashMap<String, String> map;
     AppSharedPreferences appSharedPreferences;
     HashMap<String,String> pref;
-
+    String[] colors={"#FF3300","#F5F3EF","#FFB52B","#D1EC40","#27FFBF","#CA48D9"};
 
     public RestMenuAdapter(Context context, List<HashMap<String,String>> ls) {
         this.context=context;
@@ -58,7 +61,7 @@ public class RestMenuAdapter extends RecyclerView.Adapter<RestMenuAdapter.Viewho
         holder.itemdesc.setText(map.get("itemdesc"));
         holder.itemprice.setText(map.get("itemprice"));
         holder.itemtype.setText(map.get("itemtype"));
-
+        holder.side_bar.setBackgroundColor(Color.parseColor(colors[new Random().nextInt(6)]));
     }
 
     @Override
@@ -70,7 +73,7 @@ public class RestMenuAdapter extends RecyclerView.Adapter<RestMenuAdapter.Viewho
 
         TextView itemname,itemdesc,itemprice,itemtype;
         private Api apiService;
-        
+        LinearLayout side_bar;
 
         public Viewholder(@NonNull final View itemView) {
             super(itemView);
@@ -79,7 +82,7 @@ public class RestMenuAdapter extends RecyclerView.Adapter<RestMenuAdapter.Viewho
             itemdesc=itemView.findViewById(R.id.txt_itemdesc);
             itemprice=itemView.findViewById(R.id.txt_itemprice);
             itemtype=itemView.findViewById(R.id.txt_itemtype);
-
+            side_bar=itemView.findViewById(R.id.side_bar);
         }
 
         public void loadFragment(Fragment fragment,View v) {

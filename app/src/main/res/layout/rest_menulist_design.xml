@@ -20,7 +20,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:background="#FFF"
+                android:background="#FF0000"
                 android:id="@+id/side_bar"
                 android:layout_width="10dp"
                 android:layout_height="match_parent"

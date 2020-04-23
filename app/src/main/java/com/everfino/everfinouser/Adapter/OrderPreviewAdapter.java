@@ -34,7 +34,7 @@ public class OrderPreviewAdapter extends RecyclerView.Adapter<OrderPreviewAdapte
     HashMap<String, String> map;
     AppSharedPreferences appSharedPreferences;
     HashMap<String,String> pref;
-
+    String[] colors={"#FF3300","#F5F3EF","#FFB52B","#D1EC40","#27FFBF","#CA48D9"};
 
     public OrderPreviewAdapter(Context context, List<HashMap<String,String>> ls) {
         this.context=context;
@@ -54,6 +54,7 @@ public class OrderPreviewAdapter extends RecyclerView.Adapter<OrderPreviewAdapte
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         map=ls.get(position);
 
+        holder.side_bar.setBackgroundColor(Color.parseColor(colors[new Random().nextInt(6)]));
         holder.itemname.setText(map.get("itemname"));
         holder.itemprice.setText(map.get("itemprice"));
         holder.orderquantity.setText(map.get("orderquntity"));
@@ -68,7 +69,7 @@ public class OrderPreviewAdapter extends RecyclerView.Adapter<OrderPreviewAdapte
 
         TextView itemname,itemprice,orderquantity;
         private Api apiService;
-        LinearLayout recycle_card;
+        LinearLayout side_bar;
 
 
         public Viewholder(@NonNull final View itemView) {
@@ -77,7 +78,7 @@ public class OrderPreviewAdapter extends RecyclerView.Adapter<OrderPreviewAdapte
             itemname=itemView.findViewById(R.id.txt_itemname);
             itemprice=itemView.findViewById(R.id.txt_itemprice);
             orderquantity=itemView.findViewById(R.id.txt_orderquntity);
-            recycle_card=itemView.findViewById(R.id.recylce_card);
+            side_bar=itemView.findViewById(R.id.side_bar);
         }
 
         public void loadFragment(Fragment fragment, View v) {

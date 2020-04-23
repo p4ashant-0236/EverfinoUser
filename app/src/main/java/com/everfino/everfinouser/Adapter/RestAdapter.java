@@ -26,6 +26,7 @@ import com.everfino.everfinouser.R;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +38,7 @@ public class RestAdapter extends RecyclerView.Adapter<RestAdapter.Viewholder> {
     Context context;
     List<HashMap<String,String>> ls;
     HashMap<String, String> map;
-
+    String[] colors={"#FF3300","#F5F3EF","#FFB52B","#D1EC40","#27FFBF","#CA48D9"};
 
     public RestAdapter(Context context, List<HashMap<String,String>> ls) {
         this.context=context;
@@ -56,11 +57,9 @@ public class RestAdapter extends RecyclerView.Adapter<RestAdapter.Viewholder> {
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         map=ls.get(position);
-        if(map.get("status").equals("Activate")){
-            holder.side_bar.setBackgroundColor(Color.parseColor("#008900"));
-        }else {
-            holder.side_bar.setBackgroundColor(Color.parseColor("#FF0000"));
-        }
+
+        holder.side_bar.setBackgroundColor(Color.parseColor(colors[new Random().nextInt(6)]));
+
         holder.restname.setText(map.get("restname"));
         holder.restdesc.setText(map.get("restdesc"));
         holder.email.setText(map.get("email"));

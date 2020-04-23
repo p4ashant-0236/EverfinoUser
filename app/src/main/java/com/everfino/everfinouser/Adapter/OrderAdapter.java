@@ -1,11 +1,13 @@
 package com.everfino.everfinouser.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ import com.everfino.everfinouser.R;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Viewholder> {
 
@@ -30,7 +33,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Viewholder> 
     HashMap<String, String> map;
     AppSharedPreferences appSharedPreferences;
     HashMap<String,String> pref;
-
+    String[] colors={"#FF3300","#F5F3EF","#FFB52B","#D1EC40","#27FFBF","#CA48D9"};
 
     public OrderAdapter(Context context, List<HashMap<String,String>> ls) {
         this.context=context;
@@ -49,6 +52,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Viewholder> 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         map=ls.get(position);
+
+        holder.side_bar.setBackgroundColor(Color.parseColor(colors[new Random().nextInt(6)]));
         holder.orderid.setText(map.get("orderid"));
         holder.amount.setText(map.get("amount"));
         holder.paymentstatus.setText(map.get("paymentstatus"));
@@ -65,6 +70,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Viewholder> 
 
         TextView orderid,amount,paymentstatus,order_date;
         private  Api apiService;
+        LinearLayout side_bar;
 
 
         public Viewholder(@NonNull final View itemView) {
@@ -74,6 +80,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Viewholder> 
             amount=itemView.findViewById(R.id.txt_amount);
             paymentstatus=itemView.findViewById(R.id.txt_paymentstatus);
             order_date=itemView.findViewById(R.id.txt_order_date);
+            side_bar=itemView.findViewById(R.id.side_bar);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
