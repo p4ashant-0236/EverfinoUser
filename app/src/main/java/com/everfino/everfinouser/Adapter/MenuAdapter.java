@@ -59,7 +59,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.Viewholder> {
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         map=ls.get(position);
-        holder.txtdemo.setText(map.get("itemname")+""+map.get("itemprice"));
+        holder.itemtype.setText(map.get("itemtype"));
+        holder.itemdesc.setText(map.get("itemdesc"));
+        holder.itemprice.setText(map.get("itemprice"));
+        holder.itemname.setText(map.get("itemname"));
 
     }
 
@@ -70,7 +73,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.Viewholder> {
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView txtdemo,quantity;
+        TextView quantity,itemprice,itemname,itemdesc,itemtype;
         private Api apiService;
         Button inc,dec;
 
@@ -78,10 +81,14 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.Viewholder> {
         public Viewholder(@NonNull final View itemView) {
             super(itemView);
             apiService= ApiClient.getClient().create(Api.class);
-            txtdemo=itemView.findViewById(R.id.txtdemo);
+
             quantity=itemView.findViewById(R.id.quantity);
             inc=itemView.findViewById(R.id.inc);
             dec=itemView.findViewById(R.id.dec);
+            itemname=itemView.findViewById(R.id.txt_itemname);
+            itemprice=itemView.findViewById(R.id.txt_itemprice);
+            itemdesc=itemView.findViewById(R.id.txt_itemdesc);
+            itemtype=itemView.findViewById(R.id.txt_itemtype);
 
             inc.setOnClickListener(new View.OnClickListener() {
                 @Override

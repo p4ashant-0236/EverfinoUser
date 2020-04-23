@@ -3,11 +3,13 @@ package com.everfino.everfinouser.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,8 @@ import com.everfino.everfinouser.R;
 
 import java.util.HashMap;
 import java.util.List;
+import  java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,8 +61,12 @@ public class LiveOrderAdapter extends RecyclerView.Adapter<LiveOrderAdapter.View
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         map=ls.get(position);
-        holder.txtdemo.setText(map.get("liveid")+map.get("orderid")+map.get("itemname")+map.get("status")+map.get("quntity")+map.get("itemprice"));
 
+        holder.itemprice.setText(map.get("itemprice"));
+        holder.quantity.setText(map.get("quntity"));
+        holder.itemname.setText(map.get("itemname"));
+        holder.status.setText(map.get("status"));
+        holder.order_date.setText(map.get("order_date"));
     }
 
     @Override
@@ -68,15 +76,20 @@ public class LiveOrderAdapter extends RecyclerView.Adapter<LiveOrderAdapter.View
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView txtdemo;
+        TextView itemname,quantity,status,itemprice,order_date;
         private  Api apiService;
+        LinearLayout recycle_card;
 
 
         public Viewholder(@NonNull final View itemView) {
             super(itemView);
             apiService= ApiClient.getClient().create(Api.class);
-            txtdemo=itemView.findViewById(R.id.txtdemo);
-
+            itemname=itemView.findViewById(R.id.txt_itemname);
+            quantity=itemView.findViewById(R.id.txt_quantity);
+            status=itemView.findViewById(R.id.txt_Status);
+            itemprice=itemView.findViewById(R.id.txt_itemprice);
+            order_date=itemView.findViewById(R.id.txt_Date);
+            recycle_card=itemView.findViewById(R.id.liveorder_card);
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {

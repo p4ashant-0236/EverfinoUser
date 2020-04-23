@@ -37,15 +37,15 @@ public class LoginActivity extends AppCompatActivity {
 
         edt_usernme = findViewById(R.id.edt_username);
         edt_password = findViewById(R.id.edt_password);
-        signup=findViewById(R.id.signup);
+        signup = findViewById(R.id.signup);
         btn_login = findViewById(R.id.btn_login);
 
-        apiService= ApiClient.getClient().create(Api.class);
-        appSharedPreferences=new AppSharedPreferences(this);
+        apiService = ApiClient.getClient().create(Api.class);
+        appSharedPreferences = new AppSharedPreferences(this);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(LoginActivity.this,RegisterUserActivity.class);
+                Intent i = new Intent(LoginActivity.this, RegisterUserActivity.class);
                 startActivity(i);
             }
         });
@@ -64,35 +64,38 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void user_login() {
+        if (edt_usernme.getText().length() == 0) {
+            edt_usernme.setError("Username is Required!");
+        } else if (edt_password.getText().length() == 0) {
+            edt_password.setError("Password is Required!");
+        } else {
+            JsonObject inputData = new JsonObject();
+            inputData.addProperty("username", edt_usernme.getText().toString());
+            inputData.addProperty("password", edt_password.getText().toString());
 
-        JsonObject inputData=new JsonObject();
-        inputData.addProperty("username",edt_usernme.getText().toString());
-        inputData.addProperty("password",edt_password.getText().toString());
+            Call<UserLoginResponse> call = apiService.user_login(inputData);
+            call.enqueue(new Callback<UserLoginResponse>() {
+                @Override
+                public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
+                    progressDialog.dismiss();
+                    Log.e("####res", response.body().getStatus() + "");
+                    if (response.body().getStatus() == true) {
+                        appSharedPreferences.setPref(response.body().getUserid(), response.body().getEmail());
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "check username and password", Toast.LENGTH_LONG).show();
+                    }
 
-        Call<UserLoginResponse> call = apiService.user_login(inputData);
-        call.enqueue(new Callback<UserLoginResponse>() {
-            @Override
-            public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
-                progressDialog.dismiss();
-                Log.e("####res",response.body().getStatus()+"");
-                if(response.body().getStatus()==true) {
-                    appSharedPreferences.setPref(response.body().getUserid(), response.body().getEmail());
-                    Intent i=new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(i);
-                    finish();
                 }
-                else
-                {
-                    Toast.makeText(LoginActivity.this, "check username and password", Toast.LENGTH_LONG).show();
+
+                @Override
+                public void onFailure(Call<UserLoginResponse> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Log.e("####err", t.toString());
                 }
-
-            }
-
-            @Override
-            public void onFailure(Call<UserLoginResponse> call, Throwable t) {
-                progressDialog.dismiss();
-                Log.e("####err",t.toString());
-            }
-        });
+            });
+        }
     }
 }

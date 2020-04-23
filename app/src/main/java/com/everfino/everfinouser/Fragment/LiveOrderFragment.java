@@ -104,7 +104,6 @@ public class LiveOrderFragment extends Fragment {
                         AppSharedPreferences appSharedPreferences=new AppSharedPreferences(getContext());
                         HashMap<String,String> map=appSharedPreferences.getPref();
                         rcv_liveorder.setLayoutManager(new GridLayoutManager(getContext(), 1));
-                         Toast.makeText(getContext(),restid[restlist.getSelectedItemPosition()]+"", Toast.LENGTH_SHORT).show();
                          Call<List<Liveorder>> call1=apiService.get_Live_order_peruser(restid[restlist.getSelectedItemPosition()],Integer.parseInt(map.get("userid")));
                          call1.enqueue(new Callback<List<Liveorder>>() {
                              @Override

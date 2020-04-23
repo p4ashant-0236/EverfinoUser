@@ -18,6 +18,7 @@ import retrofit2.http.Body;
 
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -56,6 +57,11 @@ public interface Api {
     @GET("rest/")
     Call<List<RestList>> get_Rest();
 
+    @PUT("enduser/modify/{userid}")
+    Call<User> update_User(@Path("userid") int userid,@Body User u);
+
+    @GET("enduser/{userid}")
+    Call<User> get_User(@Path("userid") int userid);
 
 
 }

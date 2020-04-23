@@ -1,10 +1,12 @@
 package com.everfino.everfinouser.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ import com.everfino.everfinouser.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class OrderPreviewAdapter extends RecyclerView.Adapter<OrderPreviewAdapter.Viewholder>
 {
@@ -50,7 +53,10 @@ public class OrderPreviewAdapter extends RecyclerView.Adapter<OrderPreviewAdapte
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         map=ls.get(position);
-        holder.txtdemo.setText(map.get("itemname")+""+map.get("itemprice")+map.get("orderquntity"));
+
+        holder.itemname.setText(map.get("itemname"));
+        holder.itemprice.setText(map.get("itemprice"));
+        holder.orderquantity.setText(map.get("orderquntity"));
     }
 
     @Override
@@ -60,16 +66,18 @@ public class OrderPreviewAdapter extends RecyclerView.Adapter<OrderPreviewAdapte
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView txtdemo;
+        TextView itemname,itemprice,orderquantity;
         private Api apiService;
-
+        LinearLayout recycle_card;
 
 
         public Viewholder(@NonNull final View itemView) {
             super(itemView);
             apiService= ApiClient.getClient().create(Api.class);
-            txtdemo=itemView.findViewById(R.id.txtdemo);
-
+            itemname=itemView.findViewById(R.id.txt_itemname);
+            itemprice=itemView.findViewById(R.id.txt_itemprice);
+            orderquantity=itemView.findViewById(R.id.txt_orderquntity);
+            recycle_card=itemView.findViewById(R.id.recylce_card);
         }
 
         public void loadFragment(Fragment fragment, View v) {

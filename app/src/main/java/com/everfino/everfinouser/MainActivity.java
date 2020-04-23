@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.everfino.everfinouser.Fragment.HistoryFragment;
 import com.everfino.everfinouser.Fragment.HomeFragment;
+import com.everfino.everfinouser.Fragment.LiveOrderFragment;
 import com.everfino.everfinouser.Fragment.ProfileFragment;
 import com.everfino.everfinouser.Fragment.ReservationFragment;
 import com.everfino.everfinouser.Fragment.ScanFragment;
@@ -68,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HistoryFragment();
                         loadFragment(fragment);
                         break;
-                    case R.id.nav_reservation:
+                    case R.id.nav_liveorder:
                         //Menu
-                        fragment = new ReservationFragment();
+                        fragment = new LiveOrderFragment();
                         loadFragment(fragment);
                         break;
                     case R.id.nav_scan:
