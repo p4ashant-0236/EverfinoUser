@@ -2,12 +2,14 @@ package com.everfino.everfinouser.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import com.everfino.everfinouser.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +39,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.Viewholder> {
 
     Context context;
     List<HashMap<String,String>> ls;
+    String[] colors={"#FF3300","#F5F3EF","#FFB52B","#D1EC40","#27FFBF","#CA48D9"};
 
     HashMap<String, String> map;
     AppSharedPreferences appSharedPreferences;
@@ -63,6 +67,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.Viewholder> {
         holder.itemdesc.setText(map.get("itemdesc"));
         holder.itemprice.setText(map.get("itemprice"));
         holder.itemname.setText(map.get("itemname"));
+        holder.side_bar.setBackgroundColor(Color.parseColor(colors[new Random().nextInt(6)]));
 
     }
 
@@ -77,11 +82,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.Viewholder> {
         private Api apiService;
         Button inc,dec;
 
+        LinearLayout side_bar;
 
         public Viewholder(@NonNull final View itemView) {
             super(itemView);
             apiService= ApiClient.getClient().create(Api.class);
-
+            side_bar=itemView.findViewById(R.id.side_bar);
             quantity=itemView.findViewById(R.id.quantity);
             inc=itemView.findViewById(R.id.inc);
             dec=itemView.findViewById(R.id.dec);

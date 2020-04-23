@@ -38,6 +38,8 @@ import retrofit2.Response;
 public class LiveOrderAdapter extends RecyclerView.Adapter<LiveOrderAdapter.Viewholder> {
 
     Context context;
+    String[] colors={"#FF3300","#F5F3EF","#FFB52B","#D1EC40","#27FFBF","#CA48D9"};
+
     List<HashMap<String,String>> ls;
     HashMap<String, String> map;
     AppSharedPreferences appSharedPreferences;
@@ -66,7 +68,10 @@ public class LiveOrderAdapter extends RecyclerView.Adapter<LiveOrderAdapter.View
         holder.quantity.setText(map.get("quntity"));
         holder.itemname.setText(map.get("itemname"));
         holder.status.setText(map.get("status"));
+        holder.orderid.setText(map.get("orderid"));
         holder.order_date.setText(map.get("order_date"));
+        holder.side_bar.setBackgroundColor(Color.parseColor(colors[new Random().nextInt(6)]));
+
     }
 
     @Override
@@ -76,9 +81,9 @@ public class LiveOrderAdapter extends RecyclerView.Adapter<LiveOrderAdapter.View
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView itemname,quantity,status,itemprice,order_date;
+        TextView itemname,quantity,status,itemprice,order_date,orderid;
         private  Api apiService;
-        LinearLayout recycle_card;
+        LinearLayout recycle_card,side_bar;
 
 
         public Viewholder(@NonNull final View itemView) {
@@ -89,6 +94,8 @@ public class LiveOrderAdapter extends RecyclerView.Adapter<LiveOrderAdapter.View
             status=itemView.findViewById(R.id.txt_Status);
             itemprice=itemView.findViewById(R.id.txt_itemprice);
             order_date=itemView.findViewById(R.id.txt_Date);
+            orderid=itemView.findViewById(R.id.txt_orderid);
+            side_bar=itemView.findViewById(R.id.side_bar);
             recycle_card=itemView.findViewById(R.id.liveorder_card);
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override

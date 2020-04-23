@@ -1,6 +1,7 @@
 package com.everfino.everfinouser.Fragment;
 
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -25,6 +27,7 @@ import com.everfino.everfinouser.LoginActivity;
 import com.everfino.everfinouser.Models.User;
 import com.everfino.everfinouser.R;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -42,6 +45,8 @@ public class ProfileFragment extends Fragment {
     EditText eemail, epassword, cepassword, emobileno, ename, edob;
     Spinner egender;
     LinearLayout details, edit;
+    int mYear, mMonth, mDay;
+
     private static Api apiService;
     AppSharedPreferences appSharedPreferences;
     HashMap<String, String> map;
@@ -84,6 +89,22 @@ public class ProfileFragment extends Fragment {
         Edituserbtn = view.findViewById(R.id.editbtn);
         details = view.findViewById(R.id.userdatails);
         edit = view.findViewById(R.id.edituserdetails);
+
+        mDay= Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        mMonth=Calendar.getInstance().get(Calendar.MONTH);
+        mYear=Calendar.getInstance().get(Calendar.YEAR);
+        edob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dataDialog=new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        dob.setText(date+"-"+month+"-"+year);
+                    }
+                },mYear,mMonth,mDay);
+                dataDialog.show();
+            }
+        });
         ArrayAdapter<String> data = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, g);
         data.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         egender.setAdapter(data);

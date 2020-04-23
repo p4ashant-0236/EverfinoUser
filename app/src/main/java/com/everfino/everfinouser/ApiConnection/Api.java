@@ -2,6 +2,7 @@ package com.everfino.everfinouser.ApiConnection;
 
 
 import com.everfino.everfinouser.Models.Liveorder;
+import com.everfino.everfinouser.Models.Mail;
 import com.everfino.everfinouser.Models.MenuList;
 import com.everfino.everfinouser.Models.Order;
 import com.everfino.everfinouser.Models.OrderItem;
@@ -62,6 +63,9 @@ public interface Api {
 
     @GET("enduser/{userid}")
     Call<User> get_User(@Path("userid") int userid);
+
+    @POST("forgot/enduser/")
+    Call<Mail> forgot(@Body JsonObject ob);
 
 
 }

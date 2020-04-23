@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText edt_usernme, edt_password;
     Button btn_login;
-    TextView signup;
+    TextView signup,Forgot;
     ProgressDialog progressDialog;
     private static Api apiService;
     AppSharedPreferences appSharedPreferences;
@@ -39,6 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         edt_password = findViewById(R.id.edt_password);
         signup = findViewById(R.id.signup);
         btn_login = findViewById(R.id.btn_login);
+
+        Forgot=findViewById(R.id.Forgot);
+        Forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(LoginActivity.this,ForgotActivity.class);
+                startActivity(i);
+            }
+        });
 
         apiService = ApiClient.getClient().create(Api.class);
         appSharedPreferences = new AppSharedPreferences(this);
