@@ -55,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="Sign Up"
                 android:textAlignment="center"
+                android:layout_marginTop="30dp"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15dp" />
 
@@ -64,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:text="Forgot Password ?"
                 android:textAlignment="center"
+                android:layout_marginTop="30dp"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15dp" />
 

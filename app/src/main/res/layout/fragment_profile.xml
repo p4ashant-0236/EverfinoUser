@@ -114,7 +114,8 @@
                     android:id="@+id/edob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="dd-mm-yyyy"
+                    android:hint="yyyy-MM-dd"
+                    android:inputType="date"
                     />
 
                 <Spinner

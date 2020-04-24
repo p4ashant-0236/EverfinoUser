@@ -54,18 +54,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         mMonth=Calendar.getInstance().get(Calendar.MONTH);
         mYear=Calendar.getInstance().get(Calendar.YEAR);
 
-        dob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog dataDialog=new DatePickerDialog(getApplicationContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        dob.setText(date+"-"+month+"-"+year);
-                    }
-                },mYear,mMonth,mDay);
-                dataDialog.show();
-            }
-        });
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +74,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                     JsonObject ob = new JsonObject();
                     ob.addProperty("name", name.getText().toString());
                     ob.addProperty("email", email.getText().toString());
-                    ob.addProperty("dob", new Date(dob.getText().toString()) + "");
+                    ob.addProperty("dob", dob.getText().toString());
                     ob.addProperty("mobileno", mobileno.getText().toString());
                     ob.addProperty("password", password.getText().toString());
                     ob.addProperty("gender", gender.getSelectedItem().toString());

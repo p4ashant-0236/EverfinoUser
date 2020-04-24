@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ForgotActivity"
     android:orientation="vertical"
-    android:layout_margin="50dp">
+    android:layout_margin="20dp"
+    android:textAlignment="center">
 
     <TextView
         android:layout_width="match_parent"
